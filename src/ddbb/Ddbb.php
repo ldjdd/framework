@@ -10,12 +10,16 @@ namespace dbdb;
 class Ddbb
 {
     /**
-     * @var 
+     * @var ddbb\Foundation\Application
      */
-    public static $app = null; 
+    public static $app = null;
     
     public static function createApp()
     {
-        
+        if(self::$app == null)
+        {
+        	
+        }
+        return self::$app;
     }
 }

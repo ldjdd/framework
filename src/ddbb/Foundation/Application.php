@@ -18,7 +18,16 @@ use ddbb\Foundation\Base;
  */
 class Application extends Base
 {
-    public static function run()
+	/**
+	 * The base path for the Ddbb installation.
+	 * 
+	 * Ddbb所在目录
+	 *
+	 * @var string
+	 */
+	public $basePath;
+	
+    public function run()
     {
         
     }
