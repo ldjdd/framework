@@ -5,12 +5,13 @@
  * @license http://www.ddbbbook.com/license/
  */
 
-namespace dbdb;
+namespace ddbb;
 
-class Ddbb
+use ddbb\foundation\Application;
+class ddbb
 {
     /**
-     * @var ddbb\Foundation\Application
+     * @var ddbb\foundation\Application
      */
     public static $app = null;
     
@@ -18,8 +19,13 @@ class Ddbb
     {
         if(self::$app == null)
         {
-        	
+        	self::$app = new Application();
         }
         return self::$app;
+    }
+    
+    public static function translate($message)
+    {
+        return $message;
     }
 }
