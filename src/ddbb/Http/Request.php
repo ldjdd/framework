@@ -19,6 +19,51 @@ use ddbb\foundation\Component;
 class Request extends Component 
 {
     /**
+     * Gets value from $_REQUEST by name.
+     * 
+     * @param string $name The name of request
+     * @param string $default Returns the default value if the value by the user transmit  is empty
+     * @param string $cast Expects type of the value by the user transmit, the return value's type will be 
+     * convertions to the type by $cast transmit
+     * 
+     * @return mixed
+     */
+    public function getParam($name, $default = null, $cast = null)
+    {
+        
+    }
+    
+    /**
+     * Gets value from $_GET by name.
+     *
+     * @param string $name The name of request
+     * @param string $default Returns the default value if the value by the user transmit  is empty
+     * @param string $cast Expects type of the value by the user transmit, the return value's type will be 
+     * convertions to the type by $cast transmit
+     * 
+     * @return mixed
+     */
+    public function getQuery($name, $default = null, $cast = null)
+    {
+        
+    }
+    
+    /**
+     * Gets value from $_REQUEST by name.
+     *
+     * @param string $name The name of request
+     * @param string $default Returns the default value if the value by the user transmit  is empty
+     * @param string $cast Expects type of the value by the user transmit, the return value's type will be 
+     * convertions to the type by $cast transmit
+     * 
+     * @return mixed
+     */
+    public function getPost($name, $default = null, $cast = null)
+    {
+        
+    }
+    
+    /**
      * Returns the user IP address.
      * @return string user IP address. Null is returned if the user IP address cannot be detected.
      */

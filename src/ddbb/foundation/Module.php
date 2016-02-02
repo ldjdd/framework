@@ -1,6 +1,7 @@
 <?php
 namespace ddbb\foundation;
 
+use ddbb\exceptions\UnknownControllerException;
 class Module extends Component
 {
     /**
@@ -67,6 +68,30 @@ class Module extends Component
     protected function loadComponent($name)
     {
         $config = $this->_components[$name];
+    }
     
+    /**
+     * Loads the object of controller
+     * 
+     * @param string $controller The identification of controller
+     * 
+     * @return \ddbb\foundation\Controller
+     */
+    protected function loadController($controller)
+    {
+        $className = $this->namespace .'\\' . 'controllers\\' . ucfirst($controller).'Controller.php';
+        $file = $this->basePath . '/controllers/' . ucfirst($controller) . 'Controller.php';
+        
+        if(!class_exists($className) && file_exists($file))
+        {
+            include $file;
+        }
+        
+        if(!class_exists($className))
+        {
+            throw new UnknownControllerException($className);
+        }
+        
+        return new $className($this);
     }
 }

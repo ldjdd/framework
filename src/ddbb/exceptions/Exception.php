@@ -17,5 +17,10 @@ namespace ddbb\exception;
  */
 class Exception extends \Exception
 {
+    protected $code = -100;
     
+    public function __construct($message)
+    {
+        parent::__construct($message, $this->code);
+    }
 }

@@ -7,8 +7,6 @@
 
 namespace ddbb\foundation;
 
-use ddbb\foundation\base;
-
 /**
  * Application is the base class for all application classes.
  * 
@@ -55,21 +53,49 @@ class Application extends Module
     
     protected function route()
     {
-        $path = $this->getComponent('routeAnalizer')->getPath();
+        $path = $this->getComponent('urlAnalizer')->analize($this->getRequest());
         
-        if(empty($path))
-        {
-            $path = $this->defaultController . '/' . $this->defaultAction;
-        }
-        
-        $arr = explode('/', $path);
         $module = $this;
+        $arr = explode('/', $path);
         
-        if(in_array($arr[0], $this->modules) || array_key_exists($arr[0], $this->modules))
+        if(!empty($path) && !empty($arr) && array_key_exists($arr[0], $this->modules))
         {
             $module = $this->loadModule($arr[0]);
+            array_pop($arr);
         }
         
+        $controllerId = '';
+        
+        if(empty($arr) || empty($arr[0]))
+        {
+            $controllerId = $module->defaultController;
+        }
+        else
+        {
+            $controllerId = $arr[0];
+            array_pop($arr);
+        }
+        
+        $controllerObj = $module->loadController($controllerId);
+        
+        $action = '';
+        
+        if(!empty($arr))
+        {
+            $action = $arr[0];
+            array_pop($arr);
+        }
+        
+        if(!empty($arr))
+        {
+            $request = $this->getRequest();
+            foreach ($arr as $key=>$value)
+            {
+                
+            }
+        }
+        
+        $controllerObj->runAction($action);
     }
     
     private function loadApplicationConfig()
@@ -90,8 +116,11 @@ class Application extends Module
         parent::registerCoreComponents();
         
         $this->_components = array_merge($this->_components, [
-            'request'=>[
+            'request' => [
                 'class'=>'ddbb\http\HttpRequest',
+            ],
+            'urlAnalizer' => [
+                'class'=>'ddbb\http\UrlAnalizer',
             ]
         ]);
     }
@@ -120,6 +149,14 @@ class Application extends Module
     public function setBasePath($basePath)
     {
         $this->basePath = $basePath;
+    }
+    
+    /**
+     * @return \ddbb\http\Request
+     */
+    public function getRequest()
+    {
+        return $this->getComponent('request');
     }
     
 }
