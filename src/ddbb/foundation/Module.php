@@ -91,8 +91,8 @@ class Module extends Component
      */
     protected function loadController($controller)
     {
-        $className = $this->namespace .'\\' . 'controllers\\' . ucfirst($controller).'Controller.php';
-        $file = $this->basePath . '/controllers/' . ucfirst($controller) . 'Controller.php';
+        $className = $this->namespace .'\\' . 'controllers\\' . ucfirst($controller).'Controller';
+        $file = $this->basePath . '/application/controllers/' . ucfirst($controller) . 'Controller.php';
         
         if(!class_exists($className) && file_exists($file))
         {

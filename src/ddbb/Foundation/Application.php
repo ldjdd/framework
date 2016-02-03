@@ -54,14 +54,14 @@ class Application extends Module
     protected function route()
     {
         $path = $this->getComponent('urlAnalizer')->analize($this->getRequest());
-        echo 'path:'.$path;exit();
         $module = $this;
-        $arr = explode('/', $path);
-        
+        $arr = [];
+        if(!empty($arr)) $arr = explode('/', $path);
+            
         if(!empty($path) && !empty($arr) && array_key_exists($arr[0], $this->modules))
         {
             $module = $this->loadModule($arr[0]);
-            array_pop($arr);
+            unset($arr[0]);
         }
         
         $controllerId = '';
@@ -73,7 +73,7 @@ class Application extends Module
         else
         {
             $controllerId = $arr[0];
-            array_pop($arr);
+            unset($arr[0]);
         }
         
         $controllerObj = $module->loadController($controllerId);
@@ -83,7 +83,11 @@ class Application extends Module
         if(!empty($arr))
         {
             $action = $arr[0];
-            array_pop($arr);
+            unset($arr[0]);
+        }
+        else
+        {
+            $action = $controllerObj->defaultAction ? $controllerObj->defaultAction : $module->defaultAction;
         }
         
         if(!empty($arr))

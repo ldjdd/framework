@@ -1,7 +1,7 @@
 <?php
 namespace ddbb\foundation;
 
-use ddbb\exception\Exception;
+use ddbb\exceptions\Exception;
 use ddbb\ddbb;
 
 class Controller
