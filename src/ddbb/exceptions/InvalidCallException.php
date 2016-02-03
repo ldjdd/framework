@@ -7,8 +7,6 @@
  
 namespace ddbb\exception;
 
-use ddbb\exception\Exception;
-
 /**
  * InvalidCallException represents an exception caused by calling a method in a wrong way.
  * 

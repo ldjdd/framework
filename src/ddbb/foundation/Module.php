@@ -68,6 +68,18 @@ class Module extends Component
     protected function loadComponent($name)
     {
         $config = $this->_components[$name];
+        
+        $component = new $config['class'];
+        unset($config['class']);
+        
+        foreach ($config as $key => $value)
+        {
+            $component->$key = $value;
+        }
+        
+        $component->init();
+        
+        return $component;
     }
     
     /**

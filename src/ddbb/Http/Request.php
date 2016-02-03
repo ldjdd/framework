@@ -7,6 +7,7 @@
 namespace ddbb\http;
 
 use ddbb\foundation\Component;
+use ddbb\tools\DynamicCast;
 
 /**
  * Request helps us to get http request data.
@@ -19,6 +20,19 @@ use ddbb\foundation\Component;
 class Request extends Component 
 {
     /**
+     * Sets $value to $_REQUEST[$name] and $_GET[$name]
+     *  
+     * @param string $name
+     * @param string $value
+     * 
+     * @return void
+     */
+    public function setParam($name, $value)
+    {
+        $_REQUEST[$name] = $_GET[$name] = $value;
+    }
+    
+    /**
      * Gets value from $_REQUEST by name.
      * 
      * @param string $name The name of request
@@ -30,7 +44,13 @@ class Request extends Component
      */
     public function getParam($name, $default = null, $cast = null)
     {
+        $value = null;
         
+        if(isset($_REQUEST[$name])) $value = $_REQUEST[$name];
+        if(!empty($value)) $value = $default;
+        if($cast) $value = DynamicCast::cast($value, $cast);
+        
+        return $value;
     }
     
     /**
@@ -45,7 +65,13 @@ class Request extends Component
      */
     public function getQuery($name, $default = null, $cast = null)
     {
+        $value = null;
         
+        if(isset($_GET[$name])) $value = $_GET[$name];
+        if(!empty($value)) $value = $default;
+        if($cast) $value = DynamicCast::cast($value, $cast);
+        
+        return $value;
     }
     
     /**
@@ -60,7 +86,13 @@ class Request extends Component
      */
     public function getPost($name, $default = null, $cast = null)
     {
+        $value = null;
         
+        if(isset($_POST[$name])) $value = $_POST[$name];
+        if(!empty($value)) $value = $default;
+        if($cast) $value = DynamicCast::cast($value, $cast);
+        
+        return $value;
     }
     
     /**

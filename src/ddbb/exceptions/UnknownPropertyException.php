@@ -5,7 +5,7 @@
  * @license http://www.ddbbbook.com/license/
  */
 
-namespace ddbb\exception;
+namespace ddbb\exceptions;
 
 /**
  * UnknownPropertyException represents an exception caused by accessing unknown object properties.

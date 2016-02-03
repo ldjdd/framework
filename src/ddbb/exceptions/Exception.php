@@ -5,7 +5,7 @@
  * @license http://www.ddbbbook.com/license/
  */
 
-namespace ddbb\exception;
+namespace ddbb\exceptions;
 
 /**
  * Exception represents a generic exception for all purposes.

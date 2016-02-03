@@ -15,11 +15,11 @@ class ddbb
      */
     public static $app = null;
     
-    public static function createApp()
+    public static function createApp($basePath)
     {
         if(self::$app == null)
         {
-        	self::$app = new Application();
+        	self::$app = new Application($basePath);
         }
         return self::$app;
     }

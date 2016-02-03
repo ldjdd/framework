@@ -54,7 +54,7 @@ class Application extends Module
     protected function route()
     {
         $path = $this->getComponent('urlAnalizer')->analize($this->getRequest());
-        
+        echo 'path:'.$path;exit();
         $module = $this;
         $arr = explode('/', $path);
         
@@ -91,7 +91,7 @@ class Application extends Module
             $request = $this->getRequest();
             foreach ($arr as $key=>$value)
             {
-                
+                $request->setParam($key, $value);
             }
         }
         
@@ -117,7 +117,7 @@ class Application extends Module
         
         $this->_components = array_merge($this->_components, [
             'request' => [
-                'class'=>'ddbb\http\HttpRequest',
+                'class'=>'ddbb\http\Request',
             ],
             'urlAnalizer' => [
                 'class'=>'ddbb\http\UrlAnalizer',

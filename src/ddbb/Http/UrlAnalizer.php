@@ -11,6 +11,6 @@ class UrlAnalizer extends Component
      */
     public function analize(Request $request)
     {
-        
+        return trim(substr($_SERVER['REQUEST_URI'], 0, strpos($_SERVER['REQUEST_URI'], '?')), '/');
     }
 }
