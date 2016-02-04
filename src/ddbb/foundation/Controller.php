@@ -6,6 +6,8 @@ use ddbb\ddbb;
 
 class Controller
 {
+    public $defaultAction = 'index';
+    
     public function runAction($action)
     {
         $method_name = 'action'.ucfirst($action);

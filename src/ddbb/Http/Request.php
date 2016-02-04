@@ -17,10 +17,10 @@ use ddbb\tools\DynamicCast;
  * @author ldj <ldjbenben@sina.com>
  * @since 1.0
  */
-class Request extends Component 
+class Request extends Component
 {
     /**
-     * Sets $value to $_REQUEST[$name] and $_GET[$name]
+     * Sets $value to $_REQUEST[$name], $_GET[$name] and $_POST[$name]
      *  
      * @param string $name
      * @param string $value
@@ -29,7 +29,7 @@ class Request extends Component
      */
     public function setParam($name, $value)
     {
-        $_REQUEST[$name] = $_GET[$name] = $value;
+        $_REQUEST[$name] = $_GET[$name] = $_POST[$name] = $value;
     }
     
     /**
@@ -47,9 +47,8 @@ class Request extends Component
         $value = null;
         
         if(isset($_REQUEST[$name])) $value = $_REQUEST[$name];
-        if(!empty($value)) $value = $default;
+        if(empty($value)) $value = $default;
         if($cast) $value = DynamicCast::cast($value, $cast);
-        
         return $value;
     }
     
@@ -68,7 +67,7 @@ class Request extends Component
         $value = null;
         
         if(isset($_GET[$name])) $value = $_GET[$name];
-        if(!empty($value)) $value = $default;
+        if(empty($value)) $value = $default;
         if($cast) $value = DynamicCast::cast($value, $cast);
         
         return $value;
@@ -89,7 +88,7 @@ class Request extends Component
         $value = null;
         
         if(isset($_POST[$name])) $value = $_POST[$name];
-        if(!empty($value)) $value = $default;
+        if(empty($value)) $value = $default;
         if($cast) $value = DynamicCast::cast($value, $cast);
         
         return $value;

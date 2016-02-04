@@ -11,7 +11,7 @@ class DynamicCast
     /**
      * @param int $targetType Target data type
      */
-    public static function cast($value, $targetType)
+    public static function cast($value, $targetType = null)
     {
         switch ($targetType)
         {
